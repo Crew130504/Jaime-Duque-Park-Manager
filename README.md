@@ -1,14 +1,14 @@
-# Metro Bogotá Web
+# Jaime Duque Park Manager
 
-Este es el repositorio con la solución al proyecto final de Programación Avanzada "Metro Bogotá Web". 
+Este es el repositorio con la solución a un proyecto de POO "Jaime Duque Park Manager".
 
 ## Descripción
 
-El proyecto consiste en desarrollar una aplicación web para la empresa Metro Bogotá, que permita consultar información sobre las rutas de metro, metrocable y tren de cercanías. 
+El proyecto se enfoca en la concepción y desarrollo de un gestor integral destinado al Parque Jaime Duque. La finalidad principal de este manager es optimizar la administración y operación del parque. 
 
 La aplicación tiene:
 
-- Un frontend desarrollado con HTML, JavaScript y CSS
+- Un frontend desarrollado con Java Swing
 - Un backend con una arquitectura MVC, implementando el patrón DAO y haciendo uso de servlets para la comunicación cliente-servidor. 
 - Una base de datos para persistir la información de rutas, estaciones, etc. 
 
