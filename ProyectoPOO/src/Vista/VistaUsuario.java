@@ -7,9 +7,7 @@ import java.awt.Graphics;
 import javax.swing.JOptionPane;
 public class VistaUsuario extends javax.swing.JFrame {
 
-    Fondopanel2 fondo=new Fondopanel2();
     public VistaUsuario() {
-        this.setContentPane(fondo);
         initComponents();
     }
 
@@ -28,7 +26,7 @@ public class VistaUsuario extends javax.swing.JFrame {
         comboxUsuarios = new javax.swing.JComboBox<>();
         btnVolver = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
-        btnConsultar1 = new javax.swing.JButton();
+        btnMapa = new javax.swing.JButton();
         btnConsultar = new javax.swing.JButton();
         btnSeleccionar = new javax.swing.JButton();
         btnConsultar2 = new javax.swing.JButton();
@@ -79,16 +77,16 @@ public class VistaUsuario extends javax.swing.JFrame {
         });
         getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 100, -1));
 
-        btnConsultar1.setBackground(new java.awt.Color(255, 255, 204));
-        btnConsultar1.setFont(new java.awt.Font("Segoe UI Semilight", 3, 14)); // NOI18N
-        btnConsultar1.setForeground(new java.awt.Color(51, 51, 51));
-        btnConsultar1.setText("Mapa");
-        btnConsultar1.addActionListener(new java.awt.event.ActionListener() {
+        btnMapa.setBackground(new java.awt.Color(255, 255, 204));
+        btnMapa.setFont(new java.awt.Font("Segoe UI Semilight", 3, 14)); // NOI18N
+        btnMapa.setForeground(new java.awt.Color(51, 51, 51));
+        btnMapa.setText("Mapa");
+        btnMapa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConsultar1ActionPerformed(evt);
+                btnMapaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnConsultar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 150, 100, -1));
+        getContentPane().add(btnMapa, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 150, 100, -1));
 
         btnConsultar.setBackground(new java.awt.Color(255, 255, 204));
         btnConsultar.setFont(new java.awt.Font("Segoe UI Semilight", 3, 14)); // NOI18N
@@ -123,6 +121,7 @@ public class VistaUsuario extends javax.swing.JFrame {
         });
         getContentPane().add(btnConsultar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 150, 100, -1));
 
+        txtNombre.setEditable(false);
         txtNombre.setBackground(new java.awt.Color(255, 255, 204));
         txtNombre.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
         txtNombre.setForeground(new java.awt.Color(51, 51, 51));
@@ -202,9 +201,9 @@ public class VistaUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_comboxUsuariosItemStateChanged
 
-    private void btnConsultar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultar1ActionPerformed
+    private void btnMapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMapaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnConsultar1ActionPerformed
+    }//GEN-LAST:event_btnMapaActionPerformed
 
     private void btnConsultar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultar2ActionPerformed
         // TODO add your handling code here:
@@ -220,9 +219,9 @@ public class VistaUsuario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnConsultar;
-    public javax.swing.JButton btnConsultar1;
     public javax.swing.JButton btnConsultar2;
     public javax.swing.JButton btnLimpiar;
+    public javax.swing.JButton btnMapa;
     public javax.swing.JButton btnSalir;
     public javax.swing.JButton btnSeleccionar;
     public javax.swing.JButton btnVolver;
@@ -236,17 +235,7 @@ public class VistaUsuario extends javax.swing.JFrame {
     public javax.swing.JTextField txtMaridaje;
     public javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
-//Imagen de fondo
-   class Fondopanel2 extends JPanel{
-    private Image imagen ;
-    @Override
-    public void paint (Graphics g){
-        imagen =new ImageIcon(getClass().getResource("/vista/fondo.jpg")).getImage();
-        g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
-        setOpaque(false);
-        super.paint(g);
-    }   
-} 
+
    public void limpiar() {//Acción boton limpiar
         txtNombre.setText("");     
         txtMaridaje.setText("");

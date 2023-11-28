@@ -29,6 +29,7 @@ public class VistaConsultar extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         txtForma = new javax.swing.JTextField();
         txtCiudad = new javax.swing.JTextField();
+        btnVolver = new javax.swing.JButton();
         txtVariedad = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         txtNombreConsulta1 = new javax.swing.JTextField();
@@ -79,6 +80,17 @@ public class VistaConsultar extends javax.swing.JFrame {
 
         txtCiudad.setToolTipText("");
         getContentPane().add(txtCiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(297, 370, 233, -1));
+
+        btnVolver.setBackground(new java.awt.Color(255, 255, 204));
+        btnVolver.setFont(new java.awt.Font("Segoe UI Semilight", 3, 14)); // NOI18N
+        btnVolver.setForeground(new java.awt.Color(51, 51, 51));
+        btnVolver.setText("<--");
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 60, 20));
         getContentPane().add(txtVariedad, new org.netbeans.lib.awtextra.AbsoluteConstraints(297, 410, 233, -1));
 
         jLabel14.setFont(new java.awt.Font("Segoe UI Semibold", 3, 18)); // NOI18N
@@ -126,12 +138,17 @@ public class VistaConsultar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreConsulta1ActionPerformed
 
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+
+    }//GEN-LAST:event_btnVolverActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnConsultar;
+    public javax.swing.JButton btnVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;

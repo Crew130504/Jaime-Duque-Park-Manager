@@ -5,6 +5,7 @@ import Modelo.TiendaRestaurante;
 import Vista.VistaAdmin;
 import Vista.VistaBienvenida;
 import Vista.VistaConsultar;
+import Vista.VistaMapa;
 import Vista.VistaUsuario;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,6 +23,7 @@ public class Gestor implements ActionListener {
     private VistaConsultar vistaConsulta;
     private VistaUsuario vistaUsuario;
     private VistaBienvenida vistaBienvenida;
+    private VistaMapa vistaMapa;
     private ArrayList<Atracciones> misAtracciones = new ArrayList<>();
     private ArrayList<TiendaRestaurante> misTiendaRestaurante = new ArrayList<>();
 
@@ -34,7 +36,9 @@ public class Gestor implements ActionListener {
         this.vistaConsulta = new VistaConsultar();
         this.vistaBienvenida = new VistaBienvenida();
         this.vistaAdmin = new VistaAdmin();
-        this.vistaUsuario= new VistaUsuario();
+        this.vistaUsuario = new VistaUsuario();
+        this.vistaMapa = new VistaMapa();
+       
 
         // Configuración de los listeners para los botones de las vistas
         this.vistaConsulta.btnConsultar.addActionListener(this);
@@ -46,6 +50,13 @@ public class Gestor implements ActionListener {
         this.vistaAdmin.btnSeleccionar.addActionListener(this);
         this.vistaAdmin.btnVolver.addActionListener(this);
         this.vistaAdmin.btnSalir.addActionListener(this);
+        this.vistaUsuario.btnSeleccionar.addActionListener(this);
+        this.vistaUsuario.btnVolver.addActionListener(this);
+        this.vistaUsuario.btnSalir.addActionListener(this);
+        this.vistaUsuario.btnConsultar.addActionListener(this);
+        this.vistaUsuario.btnMapa.addActionListener(this);
+        this.vistaMapa.btnVolver.addActionListener(this);
+        this.vistaConsulta.btnVolver.addActionListener(this);
 
         // Inicialización y configuración inicial de las vistas
         iniciar();
@@ -70,20 +81,21 @@ public class Gestor implements ActionListener {
         // Hace visible la vistaBienvenida
         this.vistaBienvenida.setVisible(true);
     }
-    public void cargaProperties(Properties propiedades){
-         // Declaración de variables
+
+    public void cargaProperties(Properties propiedades) {
+        // Declaración de variables
         InputStream entrada = null;
 
         try {
             // Se abre un archivo de propiedades
             entrada = new FileInputStream("src/data/Atracciones.properties");
-        
+
             // Se carga el archivo de propiedades en el objeto propiedades
             propiedades.load(entrada);
-        
+
             // Se obtiene la cantidad de elementos a procesar
             int cantidad = Integer.parseInt(propiedades.getProperty("Cantidad"));
-       
+
             // Bucle para procesar cada elemento
             for (int i = 1; i <= cantidad; i++) {
                 String atraccionInfo = propiedades.getProperty("Atraccion" + i);
@@ -94,7 +106,7 @@ public class Gestor implements ActionListener {
                     // Verifica si hay suficientes elementos para crear un objeto PastaVO
                     if (caracteristicasArray.length >= 4) {
                         String nombrePasta = caracteristicasArray[0];
-            
+
                         // Crea un objeto PastaVO y lo agrega a la lista
                         Atracciones agregarAtraccion = new Atracciones();
                         agregarAtraccion.setNombre(nombrePasta);
@@ -116,7 +128,7 @@ public class Gestor implements ActionListener {
                     e.printStackTrace();
                 }
             }
-    }
+        }
     }
 
     /**
@@ -126,19 +138,22 @@ public class Gestor implements ActionListener {
     private void llenarCombo() {
         // Limpia los elementos existentes en el ComboBox
         vistaAdmin.comboxJaime.removeAllItems();
-       
+        vistaUsuario.comboxUsuarios.removeAllItems();
 
         // Agrega la opción nula o predeterminada al principio del ComboBox
         vistaAdmin.comboxJaime.addItem("Seleccionar");
+        vistaUsuario.comboxUsuarios.addItem("Seleccionar");
 
         // Agrega elementos de misAtracciones al ComboBox
         for (Atracciones atraccion : misAtracciones) {
             vistaAdmin.comboxJaime.addItem(atraccion.getNombre());
+            vistaUsuario.comboxUsuarios.addItem(atraccion.getNombre());
         }
 
         // Agrega elementos de misTiendaRestaurante al ComboBox
         for (TiendaRestaurante tiendaRestaurante : misTiendaRestaurante) {
             vistaAdmin.comboxJaime.addItem(tiendaRestaurante.getNombre());
+            vistaUsuario.comboxUsuarios.addItem(tiendaRestaurante.getNombre());
         }
     }
 
@@ -169,6 +184,75 @@ public class Gestor implements ActionListener {
          * relativa, deshabilitando la capacidad de redimensionar y haciéndola
          * visible.
          */
+        //Funcionalidades Usuario
+        
+        //Botón volver de consulta
+        if (e.getSource() == vistaConsulta.btnVolver){
+            vistaUsuario.setVisible(true);
+            vistaConsulta.dispose();
+        }
+        
+        //Boton mostrar mapa
+        if (e.getSource() == vistaUsuario.btnMapa){
+            vistaMapa.setLocationRelativeTo(null);
+            vistaMapa.setVisible(true);   
+        }
+        
+        //Boton volver del mapa
+        if(e.getSource() == vistaMapa.btnVolver){
+            vistaMapa.dispose();
+            vistaUsuario.setVisible(true);
+        }
+        
+        //Boton volver a inicio
+        if (e.getSource() == vistaUsuario.btnVolver){
+            vistaUsuario.dispose();
+            vistaBienvenida.setVisible(true);
+        }
+        
+        //Boton Salir
+        if(e.getSource() == vistaUsuario.btnSalir){
+            vistaUsuario.dispose();
+            vistaConsulta.setVisible(true);
+            vistaConsulta.setLocationRelativeTo(null);
+        }
+        
+        if (e.getSource() == vistaUsuario.btnSeleccionar) {
+            // Obtiene el nombre seleccionado del ComboBox
+            String nombreSeleccionado = (String) vistaAdmin.comboxJaime.getSelectedItem();
+
+            // Desactiva los botones de selección (Atracciones y TiendaRestaurante)
+            vistaAdmin.btnAtracciones.setEnabled(false);
+            vistaAdmin.btnTiendaRestaurante.setEnabled(false);
+
+            // Buscar la atracción en el ArrayList por su nombre
+            for (Atracciones atraccion : misAtracciones) {
+                if (atraccion.getNombre().equals(nombreSeleccionado)) {
+                    // Actualizar los valores de la atracción seleccionada en las casillas de texto
+                    vistaAdmin.txtNombre.setText(atraccion.getNombre());
+                    vistaAdmin.txtDescription.setText(atraccion.getDescripcion());
+                    vistaAdmin.txtUbicacion.setText(atraccion.getUbicacion());
+                    vistaAdmin.txtPrecio.setText(Integer.toString(atraccion.getPrecio()));
+                    vistaAdmin.btnAtracciones.setSelected(true);
+                    vistaAdmin.btnTiendaRestaurante.setSelected(false);
+                    return; // Terminar el bucle ya que encontramos el objeto
+                }
+            }
+
+            // Buscar la tienda/restaurante en el ArrayList por su nombre
+            for (TiendaRestaurante tiendaRestaurante : misTiendaRestaurante) {
+                if (tiendaRestaurante.getNombre().equals(nombreSeleccionado)) {
+                    // Actualizar los valores de la tienda/restaurante seleccionada en las casillas de texto
+                    vistaAdmin.txtNombre.setText(tiendaRestaurante.getNombre());
+                    vistaAdmin.txtDescription.setText(tiendaRestaurante.getDescripcion());
+                    vistaAdmin.txtUbicacion.setText(tiendaRestaurante.getUbicacion());
+                    vistaAdmin.btnAtracciones.setSelected(false);
+                    vistaAdmin.btnTiendaRestaurante.setSelected(true);
+                    return; // Terminar el bucle ya que encontramos el objeto
+                }
+            }
+        }
+
         if (e.getSource() == vistaBienvenida.btnAdmin) {
             // Oculta la vistaBienvenida
             this.vistaBienvenida.setVisible(false);
@@ -264,42 +348,34 @@ public class Gestor implements ActionListener {
          * está seleccionada y actualiza los valores de la tienda/restaurante
          * seleccionada en las casillas de texto.
          */
-        if (e.getSource() == vistaAdmin.btnSeleccionar) {
-            // Obtiene el nombre seleccionado del ComboBox
-            String nombreSeleccionado = (String) vistaAdmin.comboxJaime.getSelectedItem();
-
-            // Desactiva los botones de selección (Atracciones y TiendaRestaurante)
-            vistaAdmin.btnAtracciones.setEnabled(false);
-            vistaAdmin.btnTiendaRestaurante.setEnabled(false);
-
-            
-                // Buscar la atracción en el ArrayList por su nombre
-                for (Atracciones atraccion : misAtracciones) {
-                    if (atraccion.getNombre().equals(nombreSeleccionado)) {
-                        // Actualizar los valores de la atracción seleccionada en las casillas de texto
-                        vistaAdmin.txtNombre.setText(atraccion.getNombre());
-                        vistaAdmin.txtDescription.setText(atraccion.getDescripcion());
-                        vistaAdmin.txtUbicacion.setText(atraccion.getUbicacion());
-                        vistaAdmin.txtPrecio.setText(Integer.toString(atraccion.getPrecio()));
-                        vistaAdmin.btnAtracciones.setSelected(true);
-                        vistaAdmin.btnTiendaRestaurante.setSelected(false);
-                        return; // Terminar el bucle ya que encontramos el objeto
-                    }
-                }
-            
-                // Buscar la tienda/restaurante en el ArrayList por su nombre
-                for (TiendaRestaurante tiendaRestaurante : misTiendaRestaurante) {
-                    if (tiendaRestaurante.getNombre().equals(nombreSeleccionado)) {
-                        // Actualizar los valores de la tienda/restaurante seleccionada en las casillas de texto
-                        vistaAdmin.txtNombre.setText(tiendaRestaurante.getNombre());
-                        vistaAdmin.txtDescription.setText(tiendaRestaurante.getDescripcion());
-                        vistaAdmin.txtUbicacion.setText(tiendaRestaurante.getUbicacion());
-                        vistaAdmin.btnAtracciones.setSelected(false);
-                        vistaAdmin.btnTiendaRestaurante.setSelected(true);
-                        return; // Terminar el bucle ya que encontramos el objeto
-                    }
-                }
+        //Funcionalidades Usuario
+        if (e.getSource() == vistaUsuario.btnConsultar){
+            vistaConsulta.setLocationRelativeTo(null);
+            vistaConsulta.setVisible(true);
+            vistaUsuario.dispose();
         }
+        
+        if (e.getSource() == vistaUsuario.btnSeleccionar) {
+            String nombreSeleccionado = (String) vistaUsuario.comboxUsuarios.getSelectedItem();
+            vistaUsuario.setLocationRelativeTo(null);
+            vistaUsuario.txtNombre.setEnabled(false);
+            for (Atracciones atraccion : misAtracciones) {
+                if (atraccion.getNombre().equals(nombreSeleccionado)) {
+                    // Actualizar los valores de la atracción seleccionada en las casillas de texto
+                    vistaUsuario.txtNombre.setText(atraccion.getNombre());
+                    return; // Terminar el bucle ya que encontramos el objeto
+                }
+            }
+            // Buscar la tienda/restaurante en el ArrayList por su nombre
+            for (TiendaRestaurante tiendaRestaurante : misTiendaRestaurante) {
+                if (tiendaRestaurante.getNombre().equals(nombreSeleccionado)) {
+                    // Actualizar los valores de la tienda/restaurante seleccionada en las casillas de texto
+                    vistaUsuario.txtNombre.setText(tiendaRestaurante.getNombre());
+                    return; // Terminar el bucle ya que encontramos el objeto
+                }
+            }
+        }
+
         /**
          * Bloque condicional que verifica si el evento proviene del botón
          * "Modificar" en la vistaAdmin. En caso afirmativo, realiza las
@@ -317,7 +393,6 @@ public class Gestor implements ActionListener {
          * el ComboBox con los datos actualizados. - Si no se ha seleccionado
          * ninguna opción en el ComboBox, muestra un mensaje de error.
          */
-
         if (e.getSource() == vistaAdmin.btnModificar) {
             // Obtener el nombre seleccionado del ComboBox
             String nombreSeleccionado = (String) vistaAdmin.comboxJaime.getSelectedItem();
@@ -382,7 +457,6 @@ public class Gestor implements ActionListener {
                 vistaAdmin.error("Seleccione una opción del ComboBox para modificar");
             }
         }
-
         /**
          * Bloque condicional que verifica si el evento proviene del botón
          * "Eliminar" en la vistaAdmin. En caso afirmativo, realiza las
@@ -396,10 +470,15 @@ public class Gestor implements ActionListener {
          * eliminado del ComboBox. - Si no se ha seleccionado ninguna opción en
          * el ComboBox, muestra un mensaje de error.
          */
+        if (e.getSource() == vistaBienvenida.btnUsuario) {
+            vistaUsuario.setLocationRelativeTo(null);
+            vistaBienvenida.setVisible(false);
+            vistaUsuario.setVisible(true);
+        }
+
         if (e.getSource() == vistaAdmin.btnEliminar) {
             // Obtener el nombre seleccionado del ComboBox
             String nombreSeleccionado = (String) vistaAdmin.comboxJaime.getSelectedItem();
-
             // Verificar que se haya seleccionado una opción del ComboBox
             if (!nombreSeleccionado.isEmpty()) {
                 if (vistaAdmin.btnAtracciones.isSelected()) {
