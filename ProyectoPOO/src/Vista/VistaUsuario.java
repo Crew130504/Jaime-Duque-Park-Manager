@@ -29,11 +29,11 @@ public class VistaUsuario extends javax.swing.JFrame {
         btnMapa = new javax.swing.JButton();
         btnConsultar = new javax.swing.JButton();
         btnSeleccionar = new javax.swing.JButton();
-        btnConsultar2 = new javax.swing.JButton();
+        btnCalificar = new javax.swing.JButton();
         txtNombre = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtMaridaje = new javax.swing.JTextField();
+        txtCalificacion = new javax.swing.JTextField();
         btnLimpiar = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
 
@@ -110,16 +110,16 @@ public class VistaUsuario extends javax.swing.JFrame {
         });
         getContentPane().add(btnSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
 
-        btnConsultar2.setBackground(new java.awt.Color(255, 255, 204));
-        btnConsultar2.setFont(new java.awt.Font("Segoe UI Semilight", 3, 14)); // NOI18N
-        btnConsultar2.setForeground(new java.awt.Color(51, 51, 51));
-        btnConsultar2.setText("Calificar");
-        btnConsultar2.addActionListener(new java.awt.event.ActionListener() {
+        btnCalificar.setBackground(new java.awt.Color(255, 255, 204));
+        btnCalificar.setFont(new java.awt.Font("Segoe UI Semilight", 3, 14)); // NOI18N
+        btnCalificar.setForeground(new java.awt.Color(51, 51, 51));
+        btnCalificar.setText("Calificar");
+        btnCalificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConsultar2ActionPerformed(evt);
+                btnCalificarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnConsultar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 150, 100, -1));
+        getContentPane().add(btnCalificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 150, 100, -1));
 
         txtNombre.setEditable(false);
         txtNombre.setBackground(new java.awt.Color(255, 255, 204));
@@ -142,15 +142,15 @@ public class VistaUsuario extends javax.swing.JFrame {
         jLabel2.setText("Calificación");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 90, -1, -1));
 
-        txtMaridaje.setBackground(new java.awt.Color(255, 255, 204));
-        txtMaridaje.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
-        txtMaridaje.setForeground(new java.awt.Color(51, 51, 51));
-        txtMaridaje.addActionListener(new java.awt.event.ActionListener() {
+        txtCalificacion.setBackground(new java.awt.Color(255, 255, 204));
+        txtCalificacion.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
+        txtCalificacion.setForeground(new java.awt.Color(51, 51, 51));
+        txtCalificacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMaridajeActionPerformed(evt);
+                txtCalificacionActionPerformed(evt);
             }
         });
-        getContentPane().add(txtMaridaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, 210, -1));
+        getContentPane().add(txtCalificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, 210, -1));
 
         btnLimpiar.setBackground(new java.awt.Color(255, 255, 204));
         btnLimpiar.setFont(new java.awt.Font("Segoe UI Semilight", 3, 14)); // NOI18N
@@ -181,9 +181,9 @@ public class VistaUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnConsultarActionPerformed
 
-    private void txtMaridajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaridajeActionPerformed
+    private void txtCalificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCalificacionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtMaridajeActionPerformed
+    }//GEN-LAST:event_txtCalificacionActionPerformed
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
         // TODO add your handling code here:
@@ -205,9 +205,9 @@ public class VistaUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnMapaActionPerformed
 
-    private void btnConsultar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultar2ActionPerformed
+    private void btnCalificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalificarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnConsultar2ActionPerformed
+    }//GEN-LAST:event_btnCalificarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
@@ -218,8 +218,8 @@ public class VistaUsuario extends javax.swing.JFrame {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnCalificar;
     public javax.swing.JButton btnConsultar;
-    public javax.swing.JButton btnConsultar2;
     public javax.swing.JButton btnLimpiar;
     public javax.swing.JButton btnMapa;
     public javax.swing.JButton btnSalir;
@@ -232,63 +232,21 @@ public class VistaUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel9;
-    public javax.swing.JTextField txtMaridaje;
+    public javax.swing.JTextField txtCalificacion;
     public javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 
    public void limpiar() {//Acción boton limpiar
         txtNombre.setText("");     
-        txtMaridaje.setText("");
+        txtCalificacion.setText("");
         
         buttonGroup1.clearSelection();
     }
-   public void faltanCampos(){
-       JOptionPane.showMessageDialog(null, "Todos los campos deben estar llenos", "Error",JOptionPane.ERROR_MESSAGE);
+      public void error(String txt){
+       JOptionPane.showMessageDialog(null, txt, "Error",JOptionPane.ERROR_MESSAGE);
    }
-   public void yaexiste(){
-       JOptionPane.showMessageDialog(null, "El pasta ya existe", "Error", JOptionPane.ERROR_MESSAGE);
-   }
-   public void seleccionaVariedad(){
-       JOptionPane.showMessageDialog(null, "Seleccione una Variedad", "Error", JOptionPane.ERROR_MESSAGE);
-   }
-   public void seleccionaUnaPasta(){
-       JOptionPane.showMessageDialog(null, "Seleccione una pasta para modificar.", "Error", JOptionPane.ERROR_MESSAGE);
-   }
-   public void nombreNoModificado(){
-       JOptionPane.showMessageDialog(null, "No se puede modificar el nombre.", "Error", JOptionPane.ERROR_MESSAGE);
-   }
-   public void noSeleccionoReceta(){
-       JOptionPane.showMessageDialog(null, "Seleccione una receta.", "Error", JOptionPane.ERROR_MESSAGE);
-   }
-   public void noSeleccionoImagen(){
-       JOptionPane.showMessageDialog(null, "Seleccione una imagen.", "Error", JOptionPane.ERROR_MESSAGE);
-   }
-   public void nohayregistros(){
-       System.out.println("\t\tNo hay registros.");
-   }
-   public void nomodificacion(){
-       System.out.print("No se pudo realizar la modificacion");
-   }
-   public void nosepudo(){
-       System.out.println("No se pudo :((");
-   }
-  public void noInsercion(){
-      System.out.print("No se pudo realizar la insercion");
-  }
-    public void Eliminado(){
-       JOptionPane.showMessageDialog(null, "Pasta Eliminada", "Eliminada",JOptionPane.INFORMATION_MESSAGE);
+      
+       public void msg(String txt){
+       JOptionPane.showMessageDialog(null, txt, "Eliminada",JOptionPane.INFORMATION_MESSAGE);
    }  
-    public void NoEliminado(){
-       JOptionPane.showMessageDialog(null, "Seleccione una pasta", "No Eliminada",JOptionPane.ERROR_MESSAGE);
-   }
-   public void noconsulta(){
-       System.out.println("No se pudo realizar la consulta.");
-   }
-   public void noresultados(){
-       System.out.println("No se encontraron resultados.");
-   }
-   public void nobtneliminar(){
-       System.out.println("No se pudo realizar la eliminacion");
-   }
-   
 }

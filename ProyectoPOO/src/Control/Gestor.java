@@ -57,7 +57,7 @@ public class Gestor implements ActionListener {
         this.vistaUsuario.btnMapa.addActionListener(this);
         this.vistaMapa.btnVolver.addActionListener(this);
         this.vistaConsulta.btnVolver.addActionListener(this);
-
+        this.vistaUsuario.btnCalificar.addActionListener(this);
         // Inicialización y configuración inicial de las vistas
         iniciar();
         llenarCombo();
@@ -185,6 +185,111 @@ public class Gestor implements ActionListener {
          * visible.
          */
         //Funcionalidades Usuario
+        if(e.getSource() == vistaUsuario.btnCalificar){
+            String strCalificacion = vistaUsuario.txtCalificacion.getText();
+            String nombre = vistaUsuario.txtNombre.getText();
+            if (strCalificacion.isEmpty()) {
+                // Muestra un mensaje de error si alguna casilla está vacía
+                vistaUsuario.error("La calificación debe estar llena");
+            }else{
+                
+                try{
+            int calificacion = Integer.parseInt(strCalificacion);
+            if(calificacion>=1 && calificacion<=5){
+                         for (Atracciones atraccion : misAtracciones) {
+                            if (atraccion.getNombre().equals(nombre)) {
+                                    atraccion.setCalificacion(calificacion);
+                                    vistaUsuario.msg("Su calificacion ha sido guardada");
+                                    vistaUsuario.limpiar();
+                                return; // Terminar el bucle ya que encontramos el objeto
+                            }
+                        }
+            }else{
+            vistaUsuario.error("Calificacion invalida");
+            }
+            }catch(NumberFormatException ex){
+                vistaUsuario.error("Calificacion invalida");
+            }
+            }
+            
+        }
+        
+        if (e.getSource() == vistaConsulta.btnConsultar){
+            ArrayList<String> filtroBusqueda = new ArrayList<>(); 
+            String nombre = vistaConsulta.txtNombreConsulta.getText();
+            String ubicacion = vistaConsulta.txtUbicacionConsulta.getText();
+            
+            if(nombre.isEmpty() && ubicacion.isEmpty()){
+                vistaConsulta.error("No es valida una consulta sin parametros");
+            }else  if(!nombre.isEmpty() && !ubicacion.isEmpty()){
+                for(Atracciones atraccion : misAtracciones){
+                    if(atraccion.getNombre().equals(nombre)){
+                        vistaConsulta.txtNombreResult.setText(atraccion.getNombre());
+                        vistaConsulta.txtDescripcionResult.setText(atraccion.getDescripcion());
+                        vistaConsulta.txtUbicacionResult.setText(atraccion.getUbicacion());
+                        vistaConsulta.txtPrecioResult.setText(Integer.toString(atraccion.getPrecio())); 
+                    }
+                }
+                   for(TiendaRestaurante tiendaRestaurante : misTiendaRestaurante){
+                    if(tiendaRestaurante.getNombre().equals(nombre)){
+                        vistaConsulta.txtNombreResult.setText(tiendaRestaurante.getNombre());
+                        vistaConsulta.txtDescripcionResult.setText(tiendaRestaurante.getDescripcion());
+                        vistaConsulta.txtUbicacionResult.setText(tiendaRestaurante.getUbicacion());
+                        vistaConsulta.txtPrecioResult.setText(" "); 
+                    }
+                }
+                for(Atracciones atraccion : misAtracciones){
+                    if(atraccion.getUbicacion().equals(ubicacion)){
+                        filtroBusqueda.add(atraccion.getNombre());
+                    }
+                }
+                   for(TiendaRestaurante tiendaRestaurante : misTiendaRestaurante){
+                    if(tiendaRestaurante.getUbicacion().equals(ubicacion)){
+                        filtroBusqueda.add(tiendaRestaurante.getNombre());
+                    }
+                }
+                 String[][] data= new String  [filtroBusqueda.size()][1];
+                 for(int i = 0; i<filtroBusqueda.size(); i++){
+                     data[i][0] = filtroBusqueda.get(i);  
+                 }
+                 vistaConsulta.tablaUbicaciones(data);
+            }else if(!nombre.isEmpty() || ubicacion.isEmpty()){
+                
+                for(Atracciones atraccion : misAtracciones){
+                    if(atraccion.getNombre().equals(nombre)){
+                        vistaConsulta.txtNombreResult.setText(atraccion.getNombre());
+                        vistaConsulta.txtDescripcionResult.setText(atraccion.getDescripcion());
+                        vistaConsulta.txtUbicacionResult.setText(atraccion.getUbicacion());
+                        vistaConsulta.txtPrecioResult.setText(Integer.toString(atraccion.getPrecio())); 
+                    }
+                }
+                   for(TiendaRestaurante tiendaRestaurante : misTiendaRestaurante){
+                    if(tiendaRestaurante.getNombre().equals(nombre)){
+                        vistaConsulta.txtNombreResult.setText(tiendaRestaurante.getNombre());
+                        vistaConsulta.txtDescripcionResult.setText(tiendaRestaurante.getDescripcion());
+                        vistaConsulta.txtUbicacionResult.setText(tiendaRestaurante.getUbicacion());
+                        vistaConsulta.txtPrecioResult.setText(" "); 
+                    }
+                }
+            }else if(nombre.isEmpty() || !ubicacion.isEmpty()){
+                for(Atracciones atraccion : misAtracciones){
+                    if(atraccion.getUbicacion().equals(ubicacion)){
+                        filtroBusqueda.add(atraccion.getNombre());
+                    }
+                }
+                   for(TiendaRestaurante tiendaRestaurante : misTiendaRestaurante){
+                    if(tiendaRestaurante.getUbicacion().equals(ubicacion)){
+                        filtroBusqueda.add(tiendaRestaurante.getNombre());
+                    }
+                }
+                 String[][] data= new String  [filtroBusqueda.size()][1];
+                 for(int i = 0; i<filtroBusqueda.size(); i++){
+                     data[i][0] = filtroBusqueda.get(i);  
+                 }
+                 vistaConsulta.tablaUbicaciones(data);
+            }
+                   
+        }
         
         //Botón volver de consulta
         if (e.getSource() == vistaConsulta.btnVolver){
@@ -207,19 +312,19 @@ public class Gestor implements ActionListener {
         //Boton volver a inicio
         if (e.getSource() == vistaUsuario.btnVolver){
             vistaUsuario.dispose();
+            vistaUsuario.limpiar();
             vistaBienvenida.setVisible(true);
         }
         
         //Boton Salir
         if(e.getSource() == vistaUsuario.btnSalir){
-            vistaUsuario.dispose();
-            vistaConsulta.setVisible(true);
-            vistaConsulta.setLocationRelativeTo(null);
+            System.exit(0);
         }
         
-        if (e.getSource() == vistaUsuario.btnSeleccionar) {
+        if (e.getSource() == vistaAdmin.btnSeleccionar) {
             // Obtiene el nombre seleccionado del ComboBox
             String nombreSeleccionado = (String) vistaAdmin.comboxJaime.getSelectedItem();
+            
 
             // Desactiva los botones de selección (Atracciones y TiendaRestaurante)
             vistaAdmin.btnAtracciones.setEnabled(false);
@@ -352,6 +457,10 @@ public class Gestor implements ActionListener {
         if (e.getSource() == vistaUsuario.btnConsultar){
             vistaConsulta.setLocationRelativeTo(null);
             vistaConsulta.setVisible(true);
+            vistaConsulta.txtNombreResult.setEditable(false);
+            vistaConsulta.txtDescripcionResult.setEditable(false);
+            vistaConsulta.txtUbicacionResult.setEditable(false);
+            vistaConsulta.txtPrecioResult.setEditable(false);
             vistaUsuario.dispose();
         }
         
@@ -363,6 +472,7 @@ public class Gestor implements ActionListener {
                 if (atraccion.getNombre().equals(nombreSeleccionado)) {
                     // Actualizar los valores de la atracción seleccionada en las casillas de texto
                     vistaUsuario.txtNombre.setText(atraccion.getNombre());
+                    vistaUsuario.txtCalificacion.setText(Integer.toString(atraccion.getCalificacion()));
                     return; // Terminar el bucle ya que encontramos el objeto
                 }
             }
@@ -371,6 +481,7 @@ public class Gestor implements ActionListener {
                 if (tiendaRestaurante.getNombre().equals(nombreSeleccionado)) {
                     // Actualizar los valores de la tienda/restaurante seleccionada en las casillas de texto
                     vistaUsuario.txtNombre.setText(tiendaRestaurante.getNombre());
+                    vistaUsuario.txtCalificacion.setText(Integer.toString(tiendaRestaurante.getCalificacion()));
                     return; // Terminar el bucle ya que encontramos el objeto
                 }
             }
@@ -488,6 +599,7 @@ public class Gestor implements ActionListener {
                             misAtracciones.remove(atraccion);
                             vistaAdmin.msg("Atracción Eliminada");
                             vistaAdmin.limpiar();
+                              llenarCombo();
                             break; // Terminar el bucle ya que encontramos el objeto
                         }
                     }
@@ -498,18 +610,12 @@ public class Gestor implements ActionListener {
                             misTiendaRestaurante.remove(tiendaRestaurante);
                             vistaAdmin.msg("Tienda/Restaurante Eliminado/a");
                             vistaAdmin.limpiar();
+                              llenarCombo();
                             break; // Terminar el bucle ya que encontramos el objeto
                         }
                     }
                 }
-
-                // Borra el nombre del elemento eliminado del ComboBox
-                int selectElemento = vistaAdmin.comboxJaime.getSelectedIndex();
-                if (selectElemento != -1) {
-                    DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) vistaAdmin.comboxJaime.getModel();
-                    model = (DefaultComboBoxModel<String>) vistaUsuario.comboxUsuarios.getModel();
-                    model.removeElementAt(selectElemento);
-                }
+               llenarCombo();
             } else {
                 vistaAdmin.error("Seleccione una opción");
             }

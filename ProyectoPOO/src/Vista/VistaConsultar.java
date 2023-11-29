@@ -5,6 +5,9 @@ import java.awt.Image;
 import java.awt.Graphics;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 public class VistaConsultar extends javax.swing.JFrame {
 
     
@@ -22,18 +25,19 @@ public class VistaConsultar extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtNombreConsulta = new javax.swing.JTextField();
+        txtUbicacionConsulta = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        txtForma = new javax.swing.JTextField();
-        txtCiudad = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtDescripcionResult = new javax.swing.JTextArea();
+        txtUbicacionResult = new javax.swing.JTextField();
         btnVolver = new javax.swing.JButton();
-        txtVariedad = new javax.swing.JTextField();
+        txtPrecioResult = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        txtNombreConsulta1 = new javax.swing.JTextField();
-        txtCiudad1 = new javax.swing.JTextField();
+        txtNombreConsulta = new javax.swing.JTextField();
+        txtNombreResult = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         btnConsultar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -41,15 +45,15 @@ public class VistaConsultar extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtNombreConsulta.setBackground(new java.awt.Color(255, 255, 204));
-        txtNombreConsulta.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
-        txtNombreConsulta.setForeground(new java.awt.Color(51, 51, 51));
-        txtNombreConsulta.addActionListener(new java.awt.event.ActionListener() {
+        txtUbicacionConsulta.setBackground(new java.awt.Color(255, 255, 204));
+        txtUbicacionConsulta.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
+        txtUbicacionConsulta.setForeground(new java.awt.Color(51, 51, 51));
+        txtUbicacionConsulta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreConsultaActionPerformed(evt);
+                txtUbicacionConsultaActionPerformed(evt);
             }
         });
-        getContentPane().add(txtNombreConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(326, 78, 249, -1));
+        getContentPane().add(txtUbicacionConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(326, 78, 249, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 3, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 51, 51));
@@ -71,15 +75,14 @@ public class VistaConsultar extends javax.swing.JFrame {
         jLabel7.setText("Precio Entrada");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(141, 410, 128, -1));
 
-        txtForma.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFormaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtForma, new org.netbeans.lib.awtextra.AbsoluteConstraints(295, 223, 235, 124));
+        txtDescripcionResult.setColumns(20);
+        txtDescripcionResult.setRows(5);
+        jScrollPane1.setViewportView(txtDescripcionResult);
 
-        txtCiudad.setToolTipText("");
-        getContentPane().add(txtCiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(297, 370, 233, -1));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 230, -1, -1));
+
+        txtUbicacionResult.setToolTipText("");
+        getContentPane().add(txtUbicacionResult, new org.netbeans.lib.awtextra.AbsoluteConstraints(297, 370, 233, -1));
 
         btnVolver.setBackground(new java.awt.Color(255, 255, 204));
         btnVolver.setFont(new java.awt.Font("Segoe UI Semilight", 3, 14)); // NOI18N
@@ -91,25 +94,25 @@ public class VistaConsultar extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 60, 20));
-        getContentPane().add(txtVariedad, new org.netbeans.lib.awtextra.AbsoluteConstraints(297, 410, 233, -1));
+        getContentPane().add(txtPrecioResult, new org.netbeans.lib.awtextra.AbsoluteConstraints(297, 410, 233, -1));
 
         jLabel14.setFont(new java.awt.Font("Segoe UI Semibold", 3, 18)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(51, 51, 51));
         jLabel14.setText("Nombre de la Atraccion a consultar:");
         getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 310, 29));
 
-        txtNombreConsulta1.setBackground(new java.awt.Color(255, 255, 204));
-        txtNombreConsulta1.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
-        txtNombreConsulta1.setForeground(new java.awt.Color(51, 51, 51));
-        txtNombreConsulta1.addActionListener(new java.awt.event.ActionListener() {
+        txtNombreConsulta.setBackground(new java.awt.Color(255, 255, 204));
+        txtNombreConsulta.setFont(new java.awt.Font("Segoe UI Semibold", 2, 14)); // NOI18N
+        txtNombreConsulta.setForeground(new java.awt.Color(51, 51, 51));
+        txtNombreConsulta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombreConsulta1ActionPerformed(evt);
+                txtNombreConsultaActionPerformed(evt);
             }
         });
-        getContentPane().add(txtNombreConsulta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(326, 37, 249, -1));
+        getContentPane().add(txtNombreConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(326, 37, 249, -1));
 
-        txtCiudad1.setToolTipText("");
-        getContentPane().add(txtCiudad1, new org.netbeans.lib.awtextra.AbsoluteConstraints(295, 183, 233, -1));
+        txtNombreResult.setToolTipText("");
+        getContentPane().add(txtNombreResult, new org.netbeans.lib.awtextra.AbsoluteConstraints(295, 183, 233, -1));
 
         jLabel15.setFont(new java.awt.Font("Segoe UI Semibold", 3, 18)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(51, 51, 51));
@@ -126,17 +129,13 @@ public class VistaConsultar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtFormaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFormaActionPerformed
+    private void txtUbicacionConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUbicacionConsultaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtFormaActionPerformed
+    }//GEN-LAST:event_txtUbicacionConsultaActionPerformed
 
     private void txtNombreConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreConsultaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreConsultaActionPerformed
-
-    private void txtNombreConsulta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreConsulta1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreConsulta1ActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
 
@@ -156,12 +155,13 @@ public class VistaConsultar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    public javax.swing.JTextField txtCiudad;
-    public javax.swing.JTextField txtCiudad1;
-    public javax.swing.JTextField txtForma;
+    private javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JTextArea txtDescripcionResult;
     public javax.swing.JTextField txtNombreConsulta;
-    public javax.swing.JTextField txtNombreConsulta1;
-    public javax.swing.JTextField txtVariedad;
+    public javax.swing.JTextField txtNombreResult;
+    public javax.swing.JTextField txtPrecioResult;
+    public javax.swing.JTextField txtUbicacionConsulta;
+    public javax.swing.JTextField txtUbicacionResult;
     // End of variables declaration//GEN-END:variables
 
 
@@ -174,12 +174,31 @@ public class VistaConsultar extends javax.swing.JFrame {
    public void CantidadEnCiudad(int a){
       JOptionPane.showMessageDialog(null, "De esta ciudad son originarias "+a+" pastas de las que se encuentran registradas");
 }
-   public void error(){
-       JOptionPane.showMessageDialog(null, "Inserte un nombre para consultar");
+   public void error(String txt){
+       JOptionPane.showMessageDialog(null, txt, "Error",JOptionPane.ERROR_MESSAGE);
    }
    public void noExiste(){
        JOptionPane.showMessageDialog(null, "No existe registro de esta pasta", "Error", JOptionPane.ERROR_MESSAGE);
    }
+   public void tablaUbicaciones(String [][] data){
+         // Crear un modelo de tabla
+                    String[] columnNames = {"Nombre"};
+                    // Crear un modelo de tabla no editable
+                    DefaultTableModel model = new DefaultTableModel(data, columnNames) {
+                        @Override
+                        public boolean isCellEditable(int row, int column) {
+                            return false;
+                        }
+                    };
+                    // Crear una tabla con el modelo
+                    JTable table = new JTable(model);
+
+                    // Agregar la tabla a un JScrollPane (en caso de que los datos no entren en la ventana)
+                    JScrollPane scrollPane = new JScrollPane(table);
+
+                    // Mostrar la tabla en un diálogo JOptionPane
+                    JOptionPane.showMessageDialog(null, scrollPane, "Ubicaciones", JOptionPane.PLAIN_MESSAGE);
+    }
    
 
           
